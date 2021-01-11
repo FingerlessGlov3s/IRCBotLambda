@@ -1,7 +1,9 @@
 # IRCBotLambda
 Lambda and AWS API Gateway to get around Cloudflare issues on my host hosting SecurityFeed bot, getting RSS feeds.
 
-Create Python3.8 Lambda Function, add python layer "arn:aws:lambda:eu-west-2:142628438157:layer:AWSLambda-Python-AWS-SDK:4"
+Create Python3.8 Lambda Function, add python layer "arn:aws:lambda:eu-west-2:142628438157:layer:AWSLambda-Python-AWS-SDK:4".
+
+Set Python runtime settings hander to "lambda_function.main_handler".
 
 Python Code Example
 ```
@@ -19,6 +21,8 @@ def main_handler(event, context):
         "body": response.content
     }
 ```
+
+Save the lambda, we're now ready for the API Gateway.
 
 Create a AWS API Gateway, create a GET resource which runs the lambda function we just created.
 
