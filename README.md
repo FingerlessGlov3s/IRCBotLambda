@@ -11,15 +11,14 @@ from botocore.vendored import requests
 import json
 
 def main_handler(event, context):
-   s = requests.Session() 
+   s = requests.Session()
    headers = {
       'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0'
    }
    response = s.get("https://linuxsecurity.com/linuxsecurity_advisories.xml", timeout=10,headers=headers)
-   return {
-        "statusCode": response.status_code,
-        "body": response.content
-    }
+   if response.status_code is not 200:
+      return "error - non 200 HTTP code"
+   return response.content
 ```
 
 Save the lambda, we're now ready for the API Gateway.
